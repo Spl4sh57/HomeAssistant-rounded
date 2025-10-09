@@ -1,4 +1,4 @@
-# Mon dashboard
+# Mon dashboard Rounded
 Voici mon dashboard Home Assistant pour smartphone.
 
 <p align="left">
