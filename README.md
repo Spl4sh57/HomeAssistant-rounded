@@ -21,7 +21,7 @@ Le dashboard est composé de 5 pages :
 
 ## Cartes
 
-#### Titre :
+### Titre :
 <p align="left">
   <img src="img/title.png">
 </p>
@@ -42,7 +42,7 @@ styles:
 
 </details>
 
-#### Lumière :
+### Lumière :
 <p align="left">
   <img src="img/btn-light.png">
 </p>
@@ -157,7 +157,7 @@ icon: mdi:led-strip-variant
 
 </details>
 
-#### Groupe de lumières :
+### Groupe de lumières :
 <p align="left">
   <img src="img/groupe-light.png">
 </p>
