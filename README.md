@@ -19,6 +19,12 @@ Le dashboard est composé de 5 pages :
 4. **Eve** : pour contrôler l’aspirateur robot.
 5. **Systèmes** : pour consulter des informations sur le Raspberry Pi ou encore le Synology.
 
+## Apercu
+
+<p align="left">
+  <img src="img/preview.gif" alt="Home preview" width="250"/>
+</p>
+
 ## Cartes
 
 ### Titre :
