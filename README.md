@@ -210,3 +210,9 @@ styles:
     - color: var(--contrast20)
 ```
 </details>
+
+## Don 
+
+Si tu veux m'offrir une petite bière, c'est par ici ! Merci ❤️
+ 
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/spl4sh57) 
