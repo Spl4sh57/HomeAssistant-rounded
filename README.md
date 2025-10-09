@@ -21,6 +21,25 @@ Le dashboard est composé de 5 pages :
 
 ## Cartes
 
+#### Titre :
+<p align="left">
+  <img src="img/title.png">
+</p>
+
+<details><summary>Code</summary>
+
+```yaml
+type: custom:button-card
+name: Home
+styles:
+  card:
+    - background: none
+    - padding: 16px 0
+  name:
+    - font-size: 32px
+    - color: var(--contrast20)
+```
+
 #### Lumière :
 <p align="left">
   <img src="img/btn-light.png">
