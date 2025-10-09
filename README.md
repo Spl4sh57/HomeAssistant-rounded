@@ -40,6 +40,8 @@ styles:
     - color: var(--contrast20)
 ```
 
+</details>
+
 #### Lumière :
 <p align="left">
   <img src="img/btn-light.png">
