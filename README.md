@@ -25,6 +25,7 @@ Le dashboard est composé de 5 pages :
 <p align="left">
   <img src="img/btn-light.png">
 </p>
+
 <details><summary>Code</summary>
 
 ```yaml
@@ -33,7 +34,9 @@ template: light_color
 entity: light.rampe_led
 icon: mdi:led-strip-variant
 ```
+
 </details>
+
 <details><summary>Template</summary>
 
 ```yaml
@@ -130,6 +133,7 @@ icon: mdi:led-strip-variant
           name:
             - color: var(--contrast20)
 ```
+
 </details>
 
 #### Groupe de lumières :
@@ -138,6 +142,8 @@ icon: mdi:led-strip-variant
 </p>
 
 <details><summary>Code</summary>
+
+```yaml
 type: custom:button-card
 name: Pièces de vie
 custom_fields:
