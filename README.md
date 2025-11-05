@@ -48,6 +48,249 @@ styles:
 
 </details>
 
+### Scènes :
+<p align="left">
+  <img src="img/scene.png">
+</p>
+
+<details><summary>Code</summary>
+
+```yaml
+square: true
+type: grid
+cards:
+  - type: custom:button-card
+    icon: mdi:sofa
+    aspect_ratio: 1/1
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      haptic: medium
+      service_data:
+        entity_id: scene.soiree_tv
+    styles:
+      card:
+        - border-radius: 24px
+        - background-color: var(--red)
+      icon:
+        - color: var(--black)
+  - type: custom:button-card
+    icon: mdi:weather-night
+    aspect_ratio: 1/1
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      haptic: medium
+      service_data:
+        entity_id: scene.dodo
+    styles:
+      card:
+        - border-radius: 24px
+        - background-color: var(--blue)
+      icon:
+        - color: var(--black)
+  - type: custom:button-card
+    icon: mdi:sun-thermometer-outline
+    aspect_ratio: 1/1
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      haptic: medium
+      service_data:
+        entity_id: scene.volets_entrouverts
+    styles:
+      card:
+        - border-radius: 24px
+        - background-color: var(--yellow)
+      icon:
+        - color: var(--black)
+  - type: custom:button-card
+    icon: mdi:dice-multiple
+    aspect_ratio: 1/1
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      haptic: medium
+      service_data:
+        entity_id: scene.soiree_jeux
+    styles:
+      card:
+        - border-radius: 24px
+        - background-color: var(--green)
+      icon:
+        - color: var(--black)
+columns: 4
+```
+</details>
+
+### Groupe de lumières :
+<p align="left">
+  <img src="img/groupe-light.png">
+</p>
+
+<details><summary>Code</summary>
+
+```yaml
+type: custom:button-card
+name: Pièces de vie
+custom_fields:
+  slider:
+    card:
+      type: custom:my-slider-v2
+      entity: light.salon
+      colorMode: brightness
+      styles:
+        container:
+          - border-radius: 100px
+          - overflow: visible
+          - background: none
+        card:
+          - height: 40px
+          - padding: 0 20px
+          - background: var(--brightness)
+        track:
+          - overflow: visible
+          - background: none
+        progress:
+          - background: none
+        thumb:
+          - background: var(--black)
+          - top: 2px
+          - right: "-18px"
+          - height: 36px
+          - width: 36px
+          - border-radius: 100px
+styles:
+  grid:
+    - grid-template-areas: "\"n\" \"slider\""
+    - grid-template-columns: 1fr
+    - grid-template-rows: 1fr min-content min-content
+  card:
+    - background: var(--brightness-tint)
+    - padding: 16px
+    - "--mdc-ripple-press-opacity": 0
+  name:
+    - justify-self: start
+    - font-size: 14px
+    - margin: 4px 0 12px 0
+    - color: var(--contrast20)
+```
+</details>
+
+### Météo :
+<p align="left">
+  <img src="img/meteo.png">
+</p>
+
+<details><summary>Code</summary>
+
+```yaml
+type: custom:button-card
+entity: weather.xxx
+show_name: false
+show_icon: false
+custom_fields:
+  temp: |
+    [[[
+      return states['weather.xxx'].attributes.temperature + '°'
+    ]]]
+  cond: |
+    [[[
+      var time = states["weather.xxx"].state
+      let welcome = '';
+      if (time == 'clear-night'){
+        welcome = 'Nuit dégagée';
+      } else if (time == 'clear'){
+        welcome = Ensoleillé;
+      } else if (time == 'partlycloudy'){
+        welcome = 'Partiellement nuageux';
+      } else if (time == 'lightning-rainy'){
+        welcome = 'Orage pluvieux';
+      } else if (time == 'cloudy'){
+        welcome = 'Nuageux';
+      } else if (time == 'rainy'){
+        welcome = 'Pluvieux';
+      } else if (time == 'lightning'){
+        welcome = 'Orageux';
+      } else if (time == 'sunny'){
+        welcome = 'Ensoleillé';
+      } else {
+        welcome = states["weather.xxx"].state;
+      }
+      return welcome;
+    ]]]
+  icon: |
+    [[[
+      var weather = states["weather.xxx"].state
+      let welcome = '';
+      if (states['weather.xxx'].state == 'partlycloudy') {
+        return '<img src = "/local/weather_icons/partly-cloudy-day.svg" width="90" height="90" />'
+      } else if (states['weather.xxx'].state == 'lightning') {
+        return '<img src = "/local/weather_icons/lightning-bolt.svg" width="90" height="90" />'
+      } else if (states['weather.xxx'].state == 'lightning-rainy') {
+        return '<img src = "/local/weather_icons/thunderstorms-rain.svg" width="90" height="90" />'
+      } else if (states['weather.xxx'].state == 'sunny') {
+        return '<img src = "/local/weather_icons/clear-day.svg" width="90" height="90" />'
+      } else if (states['weather.xxx'].state == 'rainy') {
+        return '<img src = "/local/weather_icons/rain.svg" width="90" height="90" />'
+      } else {
+        return '<img src = "/local/weather_icons/' + weather + '.svg" width="90" height="90" />'
+      }
+      return welcome;
+    ]]] 
+  icon2: |
+    [[[
+      return '<ha-icon icon="mdi:water-percent" style="width:26px; height: 26px;"> </ha-icon>'
+    ]]]
+  prec: |
+    [[[
+      return states["weather.xxx"].attributes.humidity + '%'
+    ]]]
+  icon3: |
+    [[[
+      return '<ha-icon icon="mdi:weather-windy" style="width:26px; height: 26px;"> </ha-icon>'
+    ]]]
+  wind: |
+    [[[
+      let myNumber = states["weather.xxx"].attributes.wind_speed;
+      let roundedNumber = `${Math.round(myNumber)} km/h`;
+      return roundedNumber;
+    ]]]
+styles:
+  grid:
+    - grid-template-rows: 33% auto% 33%
+    - grid-template-columns: 50% 25% 25%
+    - grid-template-areas: |
+        "icon icon2 icon3"
+        "temp prec wind"
+        "cond . ."
+  card:
+    - height: 120pt
+  custom_fields:
+    icon:
+      - margin-top: 3%
+    temp:
+      - font-size: 22pt
+      - font-weight: 700
+    cond:
+      - font-size: 10pt
+      - margin-bottom: 3%
+      - margin-left: "-3%"
+      - text-transform: capitalize
+    icon2:
+      - margin-left: "-35%"
+      - margin-top: 50%
+    prec:
+      - margin-left: "-34%"
+    icon3:
+      - margin-left: "-35%"
+      - margin-top: 50%
+    wind:
+      - margin-left: "-34%"
+
+```
+</details>
+
 ### Lumière :
 <p align="left">
   <img src="img/btn-light.png">
@@ -163,62 +406,8 @@ icon: mdi:led-strip-variant
 
 </details>
 
-### Groupe de lumières :
-<p align="left">
-  <img src="img/groupe-light.png">
-</p>
-
-<details><summary>Code</summary>
-
-```yaml
-type: custom:button-card
-name: Pièces de vie
-custom_fields:
-  slider:
-    card:
-      type: custom:my-slider-v2
-      entity: light.salon
-      colorMode: brightness
-      styles:
-        container:
-          - border-radius: 100px
-          - overflow: visible
-          - background: none
-        card:
-          - height: 40px
-          - padding: 0 20px
-          - background: var(--brightness)
-        track:
-          - overflow: visible
-          - background: none
-        progress:
-          - background: none
-        thumb:
-          - background: var(--black)
-          - top: 2px
-          - right: "-18px"
-          - height: 36px
-          - width: 36px
-          - border-radius: 100px
-styles:
-  grid:
-    - grid-template-areas: "\"n\" \"slider\""
-    - grid-template-columns: 1fr
-    - grid-template-rows: 1fr min-content min-content
-  card:
-    - background: var(--brightness-tint)
-    - padding: 16px
-    - "--mdc-ripple-press-opacity": 0
-  name:
-    - justify-self: start
-    - font-size: 14px
-    - margin: 4px 0 12px 0
-    - color: var(--contrast20)
-```
-</details>
-
 ## Don 
 
-Si tu veux m'offrir une petite bière, c'est par ici ! Merci ❤️
+Si tu veux m'offrir une petite bière ou un café, c'est par ici ! Merci ❤️
  
 [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/spl4sh57) 
