@@ -7,7 +7,7 @@ Voici mon dashboard Home Assistant pour smartphone.
 </p>
 
 Je n’ai rien inventé, je m’inspire et je prends des idées que je modifie si besoin, mais pour résumer :
-- Le thème principal est [**Rounded**](https://community.home-assistant.io/t/rounded-dashboard-guide/543043) de **Leon**, que j’ai très légèrement modifié.
+- Le thème principal est [**Rounded**](https://community.home-assistant.io/t/rounded-dashboard-guide/543043) de **Leon**, que j’ai très légèrement modifié, voir fichier Rounded.yaml.
 - Pour compléter le thème, voir aussi les travaux de [**jimmy-landry**](https://https://github.com/jimmy-landry) et [**Tamper Evident**](https://www.youtube.com/@dontuseiftamperevident).
 - La barre de navigation vient à la base de [**My Smart Home**](https://www.youtube.com/watch?v=q8spkVPQiL0).
 
@@ -304,7 +304,6 @@ template: light_color
 entity: light.rampe_led
 icon: mdi:led-strip-variant
 ```
-
 </details>
 
 <details><summary>Template</summary>
@@ -403,7 +402,92 @@ icon: mdi:led-strip-variant
           name:
             - color: var(--contrast20)
 ```
+</details>
 
+### Imprimante 3D :
+<p align="left">
+  <img src="img/bouton-print.gif">
+</p>
+
+<details><summary>Code</summary>
+
+```yaml
+type: custom:button-card
+entity: switch.prise_bambu_lab_a1
+icon: mdi:printer-3d
+name: Bambu Lab A1
+label: Allumage
+show_label: true
+show_state: false
+tap_action:
+  action: toggle
+hold_action:
+  action: more-info
+extra_styles: |
+  @keyframes print {
+    0%,100% { clip-path: polygon(0 0,0 51%,20% 51%,51% 33%,81% 53%,100% 53%,100% 0); }
+    10%     { clip-path: polygon(0 0,0 100%,49% 100%,85% 83%,49% 98%,50% 89%,51% 82%,46% 79%,36% 73%,17% 82%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    20%     { clip-path: polygon(0 0,0 100%,100% 100%,85% 83%,66% 73%,56% 79%,51% 83%,46% 79%,36% 73%,17% 82%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    30%     { clip-path: polygon(0 0,0 100%,100% 100%,85% 83%,66% 73%,54% 69%,50% 61%,45% 69%,36% 73%,17% 82%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    40%     { clip-path: polygon(0 0,0 100%,100% 100%,85% 83%,66% 73%,54% 69%,50% 61%,45% 69%,34% 63%,25% 54%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    50%     { clip-path: polygon(0 0,0 100%,100% 100%,76% 51%,66% 63%,54% 69%,50% 61%,45% 69%,34% 63%,25% 54%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    60%     { clip-path: polygon(0 0,0 100%,100% 100%,76% 51%,66% 63%,55% 69%,50% 61%,39% 55%,32% 55%,25% 54%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    70%     { clip-path: polygon(0 0,0 100%,100% 100%,76% 51%,68% 53%,60% 55%,50% 61%,39% 55%,32% 55%,25% 54%,20% 50%,51% 33%,81% 52%,100% 52%,100% 0); }
+    80%     { clip-path: polygon(0 0,0 100%,100% 100%,76% 51%,68% 53%,60% 55%,50% 61%,50% 50%,51% 37%,31% 44%,30% 35%,51% 33%,81% 52%,100% 52%,100% 0); }
+    90%     { clip-path: polygon(0 0,0 100%,100% 100%,77% 51%,67% 42%,64% 34%,56% 34%,50% 36%,39% 40%,31% 44%,30% 35%,41% 33%,85% 53%,100% 52%,100% 0); }
+  }
+custom_fields:
+  speed: |
+    [[[
+      return states['switch.prise_bambu_lab_a1'].state === 'on'
+        ? states['sensor.a1_03919d4c3101474_progression_de_l_impression'].state + '%'
+        : 'Off';
+    ]]]
+styles:
+  grid:
+    - position: relative
+  card:
+    - padding: 18px
+  img_cell:
+    - justify-self: end
+    - width: 30pt
+    - height: 30pt
+    - background: rgb(255,145,138)
+    - margin-top: 1%
+    - border-radius: 50%
+  icon:
+    - width: 24px
+    - height: 24px
+  name:
+    - justify-self: start
+    - font-size: 18px
+    - font-weight: 700
+    - margin-top: "-20%"
+  label:
+    - justify-self: start
+    - font-size: 14px
+    - margin-top: "-5%"
+    - font-weight: 300
+  custom_fields:
+    speed:
+      - position: absolute
+      - left: 65%
+      - top: 20%
+      - text-align: right
+      - font-weight: 600
+      - font-size: 23px
+state:
+  - value: "on"
+    styles:
+      icon:
+        - animation: print 2s linear infinite
+        - color: white
+  - value: "off"
+    styles:
+      img_cell:
+        - background: rgba(75,75,75,0.35)
+        - opacity: 0.25
+```
 </details>
 
 ## Don 
